@@ -16,7 +16,6 @@ import {withStyles} from '@material-ui/core/styles'
 
 //pages
 import PublicHome from 'pages/public/Home'
-import moment from 'moment'
 
 const styles = theme => ({
   root: {

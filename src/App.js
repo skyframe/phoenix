@@ -22,6 +22,10 @@ import NotificationsIcon from '@material-ui/icons/Notifications'
 import {FaUser} from 'react-icons/fa'
 import Menu from '@material-ui/core/Menu/Menu'
 import MenuItem from '@material-ui/core/MenuItem/MenuItem'
+import {bindActionCreators} from 'redux'
+import {logout as onLogout} from 'actions/authentication'
+import connect from 'react-redux/es/connect/connect'
+import {Redirect} from 'react-router-dom'
 
 const drawerWidth = 240
 
@@ -113,21 +117,26 @@ class App extends React.Component {
   }
 
   openAvatar = event => {
-    this.setState({ anchorEl: event.currentTarget})
+    this.setState({anchorEl: event.currentTarget})
   }
 
   closeAvatar = event => {
-    this.setState({ anchorEl: null})
+    this.setState({anchorEl: null})
   }
 
   handleLogout = event => {
-    this.setState({ anchorEl: null})
+    this.props.onLogout()
+    this.setState({anchorEl: null})
   }
 
   render() {
-    const {classes} = this.props
-    const { anchorEl } = this.state;
-    const open = Boolean(anchorEl);
+    const {classes, security} = this.props
+    const {anchorEl} = this.state
+    const open = Boolean(anchorEl)
+
+    if (!security || !security.claims) {
+      return <Redirect to={"/login"}/>
+    }
 
     return (
         <React.Fragment>
@@ -220,6 +229,20 @@ class App extends React.Component {
 
 App.propTypes = {
   classes: PropTypes.object.isRequired,
+  onLogout: PropTypes.func.isRequired,
 }
 
+const mapStateToProps = state => {
+  return {
+    security: state.security,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    onLogout,
+  }, dispatch)
+}
+
+App = withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(App))
 export default withStyles(styles)(App)

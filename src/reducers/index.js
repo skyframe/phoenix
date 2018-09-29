@@ -9,7 +9,7 @@ const appReducer = combineReducers({
 const rootReducer = (state, action) => {
   if (action.type === LOGOUT) {
     state = undefined
-    sessionStorage.removeItem('accessToken')
+    sessionStorage.clear()
   }
 
   return appReducer(state, action)

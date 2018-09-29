@@ -1,6 +1,7 @@
 import moment from 'moment'
 import {
   AUTHENTICATE_SUCCESS,
+  LOGOUT,
 } from '../actions/actionTypes'
 
 export default function security(state = {
@@ -8,7 +9,6 @@ export default function security(state = {
 }, action) {
   switch (action.type) {
     case AUTHENTICATE_SUCCESS:
-      console.log('AUTHENTICATE_SUCCESS ', action)
       sessionStorage.setItem('accessToken', action.result.accessToken)
       return {
         ...state,
