@@ -1,24 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-import SimpleLineChart from './SimpleLineChart';
-import SimpleTable from './SimpleTable';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import {mainListItems, secondaryListItems} from './listItems'
+import SimpleLineChart from './SimpleLineChart'
+import SimpleTable from './SimpleTable'
 
-const drawerWidth = 240;
+//@material-ui
+import {withStyles} from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Drawer from '@material-ui/core/Drawer'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import Badge from '@material-ui/core/Badge'
+import MenuIcon from '@material-ui/icons/Menu'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import NotificationsIcon from '@material-ui/icons/Notifications'
+
+const drawerWidth = 240
 
 const styles = theme => ({
   root: {
@@ -92,27 +94,27 @@ const styles = theme => ({
   tableContainer: {
     height: 320,
   },
-});
+})
 
-class Dashboard extends React.Component {
+class App extends React.Component {
   state = {
     open: true,
-  };
+  }
 
   handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
+    this.setState({open: true})
+  }
 
   handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
+    this.setState({open: false})
+  }
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props
 
     return (
         <React.Fragment>
-          <CssBaseline />
+          <CssBaseline/>
           <div className={classes.root}>
             <AppBar
                 position="absolute"
@@ -128,14 +130,14 @@ class Dashboard extends React.Component {
                         this.state.open && classes.menuButtonHidden,
                     )}
                 >
-                  <MenuIcon />
+                  <MenuIcon/>
                 </IconButton>
                 <Typography variant="title" color="inherit" noWrap className={classes.title}>
                   Dashboard
                 </Typography>
                 <IconButton color="inherit">
                   <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
+                    <NotificationsIcon/>
                   </Badge>
                 </IconButton>
               </Toolbar>
@@ -143,43 +145,44 @@ class Dashboard extends React.Component {
             <Drawer
                 variant="permanent"
                 classes={{
-                  paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+                  paper: classNames(classes.drawerPaper,
+                      !this.state.open && classes.drawerPaperClose),
                 }}
                 open={this.state.open}
             >
               <div className={classes.toolbarIcon}>
                 <IconButton onClick={this.handleDrawerClose}>
-                  <ChevronLeftIcon />
+                  <ChevronLeftIcon/>
                 </IconButton>
               </div>
-              <Divider />
+              <Divider/>
               <List>{mainListItems}</List>
-              <Divider />
+              <Divider/>
               <List>{secondaryListItems}</List>
             </Drawer>
             <main className={classes.content}>
-              <div className={classes.appBarSpacer} />
+              <div className={classes.appBarSpacer}/>
               <Typography variant="display1" gutterBottom>
                 Orders
               </Typography>
               <Typography component="div" className={classes.chartContainer}>
-                <SimpleLineChart />
+                <SimpleLineChart/>
               </Typography>
               <Typography variant="display1" gutterBottom>
                 Products
               </Typography>
               <div className={classes.tableContainer}>
-                <SimpleTable />
+                <SimpleTable/>
               </div>
             </main>
           </div>
         </React.Fragment>
-    );
+    )
   }
 }
 
-Dashboard.propTypes = {
+App.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(Dashboard);
+export default withStyles(styles)(App)
