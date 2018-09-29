@@ -1,5 +1,5 @@
 # phoenix
-Web app for Hawk
+Web app for Hawk (React.js)
 
 PHOENIX – THE FIREBIRD
 Genitive: Phoenicis
