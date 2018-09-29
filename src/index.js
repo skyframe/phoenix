@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import withRoot from './withRoot'
-import App from 'app/App'
+import config from 'react-global-configuration'
+import App from './App'
 
 import {
   BrowserRouter as Router,
@@ -15,12 +16,17 @@ import {withStyles} from '@material-ui/core/styles'
 
 //pages
 import PublicHome from 'pages/public/Home'
+import moment from 'moment'
 
 const styles = theme => ({
   root: {
     textAlign: 'center',
     paddingTop: theme.spacing.unit * 20,
   },
+})
+
+config.set({
+  apiUrl: 'localhost:9006/api/v1',
 })
 
 const Index = () => {

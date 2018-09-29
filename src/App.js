@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import {mainListItems, secondaryListItems} from './listItems'
-import SimpleLineChart from './SimpleLineChart'
-import SimpleTable from './SimpleTable'
+import {mainListItems, secondaryListItems} from './app/listItems'
+import SimpleLineChart from './app/SimpleLineChart'
+import SimpleTable from './app/SimpleTable'
 
 //@material-ui
 import {withStyles} from '@material-ui/core/styles'
@@ -19,6 +19,9 @@ import Badge from '@material-ui/core/Badge'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import NotificationsIcon from '@material-ui/icons/Notifications'
+import {FaUser} from 'react-icons/fa'
+import Menu from '@material-ui/core/Menu/Menu'
+import MenuItem from '@material-ui/core/MenuItem/MenuItem'
 
 const drawerWidth = 240
 
@@ -109,8 +112,22 @@ class App extends React.Component {
     this.setState({open: false})
   }
 
+  openAvatar = event => {
+    this.setState({ anchorEl: event.currentTarget})
+  }
+
+  closeAvatar = event => {
+    this.setState({ anchorEl: null})
+  }
+
+  handleLogout = event => {
+    this.setState({ anchorEl: null})
+  }
+
   render() {
     const {classes} = this.props
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
 
     return (
         <React.Fragment>
@@ -140,6 +157,26 @@ class App extends React.Component {
                     <NotificationsIcon/>
                   </Badge>
                 </IconButton>
+                <IconButton color="inherit" onClick={this.openAvatar}>
+                  <FaUser/>
+                </IconButton>
+                <Menu
+                    id="menu-avatar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={open}
+                    onClose={this.closeAvatar}
+                >
+                  <MenuItem onClick={this.closeAvatar}>Profile</MenuItem>
+                  <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                </Menu>
               </Toolbar>
             </AppBar>
             <Drawer

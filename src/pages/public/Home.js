@@ -7,7 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import withStyles from '@material-ui/core/styles/withStyles'
 
 //views
-import Login from 'views/login/Login'
+import LoginContainer from 'views/login/LoginContainer'
 
 const Home = (props) => {
   const {classes} = props
@@ -16,7 +16,7 @@ const Home = (props) => {
       <React.Fragment>
         <CssBaseline/>
         <main className={classes.layout}>
-          <Login onSignIn={props.onSignIn}/>
+          <LoginContainer/>
         </main>
       </React.Fragment>
   )
@@ -24,7 +24,6 @@ const Home = (props) => {
 
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
-  onSignIn: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(Home)

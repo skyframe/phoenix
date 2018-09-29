@@ -10,6 +10,10 @@ import {
 import blue from '@material-ui/core/colors/blue'
 import green from '@material-ui/core/colors/green'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import {applyMiddleware, createStore} from 'redux'
+import thunk from 'redux-thunk'
+import rootReducer from 'reducers'
+import {Provider} from 'react-redux'
 
 // A theme with custom primary and secondary color.
 // It's optional.
@@ -28,19 +32,32 @@ const jss = create(jssPreset())
 // It's optional.
 const generateClassName = createGenerateClassName()
 
+const createStoreWithMiddleware = applyMiddleware(
+    thunk,
+)(createStore)
+
+const initialState = {}
+const store = createStoreWithMiddleware(
+    rootReducer,
+    initialState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__())
+
 function withRoot(Component) {
   function WithRoot(props) {
     // JssProvider allows customizing the JSS styling solution.
     return (
-        <JssProvider jss={jss} generateClassName={generateClassName}>
-          {/* MuiThemeProvider makes the theme available down the React tree
+        <Provider store={store}>
+          <JssProvider jss={jss} generateClassName={generateClassName}>
+            {/* MuiThemeProvider makes the theme available down the React tree
           thanks to React context. */}
-          <MuiThemeProvider theme={theme}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline/>
-            <Component {...props} />
-          </MuiThemeProvider>
-        </JssProvider>
+            <MuiThemeProvider theme={theme}>
+              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+              <CssBaseline/>
+              <Component {...props} />
+            </MuiThemeProvider>
+          </JssProvider>
+        </Provider>
     )
   }
 
