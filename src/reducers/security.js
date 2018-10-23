@@ -1,7 +1,6 @@
 import moment from 'moment'
 import {
   AUTHENTICATE_SUCCESS,
-  LOGOUT,
 } from '../actions/actionTypes'
 
 export default function security(state = {

@@ -21,7 +21,7 @@ export function authenticateStart() {
 }
 
 export function authenticate(username, password) {
-  console.log("authenticate = ", username, password)
+  console.log('authenticate = ', username, password)
 
   sessionStorage.removeItem('accessToken')
   return dispatch => {
