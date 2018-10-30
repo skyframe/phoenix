@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import withRoot from './withRoot'
 import config from 'react-global-configuration'
-import App from './App'
+import App from './base/app/App'
 
 import {
   BrowserRouter as Router,
@@ -16,33 +16,20 @@ import {withStyles} from '@material-ui/core/styles'
 
 //pages
 import PublicHome from 'pages/public/Home'
-
-const styles = theme => ({
-  root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
-  },
-})
+import Root from 'Root'
 
 config.set({
   apiUrl: 'localhost:9006/api/v1',
 })
 
-const Index = () => {
-  return (
-      <Router>
-        <Switch>
-          <Route path={'/login'} component={PublicHome}/>
-          <Route path={'/'} component={App}/>
-        </Switch>
-      </Router>
-  )
-}
-
-Index.propTypes = {
-  classes: PropTypes.object.isRequired,
-}
-
-const Root = withRoot(withStyles(styles)(Index))
+// const Index = () => {
+//   return (
+//
+//   )
+// }
+//
+// Index.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// }
 
 ReactDOM.render(<Root/>, document.querySelector('#root'))

@@ -1,14 +1,14 @@
 import React from 'react'
 import {bindActionCreators} from 'redux'
 import Login from './Login'
-import {authenticate} from 'actions/authentication'
+import {authenticate} from 'redux/actions/authentication'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
 class LoginContainer extends React.Component {
   render() {
     if (this.props.security && this.props.security.claims) {
-      return <Redirect to={"/"}/>
+      return <Redirect to={"/home"}/>
     }
     return <Login onAuthenticate={this.props.authenticate}/>
   }

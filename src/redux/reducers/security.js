@@ -26,15 +26,13 @@ let parseToken = (token) => {
   // url for some reason during registration
   if (token && !(token === 'undefined')) {
     try {
-      let payloadData = token.substring(token.indexOf('.') + 1,
-          token.lastIndexOf('.'))
+      let payloadData = token.substring(token.indexOf('.') + 1, token.lastIndexOf('.'))
       let payloadString = atob(payloadData)
       let payload = JSON.parse(payloadString)
 
       let expiry = moment.unix(payload.exp)
       let remaining = moment.duration(expiry.diff(moment()))
-      console.log('Token parsed. It will expire in ' + remaining.as('minutes') +
-          ' minutes')
+      console.log('Token parsed. It will expire in ' + remaining.as('minutes') + ' minutes')
       if (remaining <= 0) {
         sessionStorage.clear()
         return

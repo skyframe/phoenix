@@ -12,7 +12,7 @@ import green from '@material-ui/core/colors/green'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import {applyMiddleware, createStore} from 'redux'
 import thunk from 'redux-thunk'
-import rootReducer from 'reducers'
+import rootReducer from 'redux/reducers'
 import {Provider} from 'react-redux'
 
 // A theme with custom primary and secondary color.
@@ -49,10 +49,9 @@ function withRoot(Component) {
     return (
         <Provider store={store}>
           <JssProvider jss={jss} generateClassName={generateClassName}>
-            {/* MuiThemeProvider makes the theme available down the React tree
-          thanks to React context. */}
+            {/* MuiThemeProvider makes the theme available down the React tree thanks to React context. */}
             <MuiThemeProvider theme={theme}>
-              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+              {/*CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
               <CssBaseline/>
               <Component {...props} />
             </MuiThemeProvider>

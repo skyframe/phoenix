@@ -6,7 +6,7 @@ import {
 } from './actionTypes'
 
 import config from 'react-global-configuration'
-import {jsonRpcRequest} from 'actions/mock/mockUtilities'
+import {jsonRpcRequest} from './mock/mockUtilities'
 
 export function authenticateFailed(error) {
   return {type: AUTHENTICATE_ERROR, error}
@@ -21,9 +21,6 @@ export function authenticateStart() {
 }
 
 export function authenticate(username, password) {
-  console.log('authenticate = ', username, password)
-
-  sessionStorage.removeItem('accessToken')
   return dispatch => {
     jsonRpcRequest({
       url: config.get('apiUrl'),
@@ -33,9 +30,7 @@ export function authenticate(username, password) {
         password,
       },
       onStart: () => dispatch(authenticateStart()),
-      onSuccess: result => {
-        dispatch(authenticateSuccess(result))
-      },
+      onSuccess: result => dispatch(authenticateSuccess(result)),
       onError: error => dispatch(authenticateFailed(error)),
     })
   }

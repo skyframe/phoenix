@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
-import {LOGOUT} from 'actions/actionTypes'
-import security from 'reducers/security'
+import {LOGOUT} from 'redux/actions/actionTypes'
+import security from 'redux/reducers/security'
 
 const appReducer = combineReducers({
   security,
